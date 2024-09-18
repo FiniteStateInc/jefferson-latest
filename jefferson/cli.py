@@ -42,6 +42,11 @@ def cli(
     force: bool,
     verbose: int,
 ) -> int:
+    if isinstance(file, bytes):
+        file = Path(file.decode("utf-8"))
+    if isinstance(dest, bytes):
+        dest = Path(dest.decode("utf-8"))
+
     if dest.exists() and not force:
         print("Destination path already exists!")
         return -1
